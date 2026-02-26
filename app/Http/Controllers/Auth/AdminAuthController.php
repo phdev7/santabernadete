@@ -25,7 +25,7 @@ class AdminAuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (! Auth::attempt($credentials, false)) {
+        if (! Auth::attempt($credentials, true)) {
             throw ValidationException::withMessages([
                 'email' => 'Credenciais inválidas.',
             ]);
