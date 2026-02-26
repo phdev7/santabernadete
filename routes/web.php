@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminSyncController;
 use App\Http\Controllers\Admin\ConfiguracaoController;
+use App\Http\Controllers\Admin\EnvioMarmitaController;
 use App\Http\Controllers\Admin\MantimentoController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\PublicController;
@@ -24,12 +26,20 @@ Route::prefix('admin')->group(function (): void {
         })->name('index');
 
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+        Route::get('/sync-state', [AdminSyncController::class, 'state'])
+            ->middleware('throttle:180,1')
+            ->name('sync-state');
 
         Route::get('/mantimentos', [MantimentoController::class, 'index'])->name('mantimentos.index');
         Route::post('/mantimentos', [MantimentoController::class, 'store'])->name('mantimentos.store');
         Route::put('/mantimentos/salvar', [MantimentoController::class, 'bulkUpdate'])->name('mantimentos.bulk-update');
         Route::put('/mantimentos/{mantimento}', [MantimentoController::class, 'update'])->name('mantimentos.update');
         Route::delete('/mantimentos/{mantimento}', [MantimentoController::class, 'destroy'])->name('mantimentos.destroy');
+
+        Route::get('/envios-marmitas', [EnvioMarmitaController::class, 'index'])->name('envios-marmitas.index');
+        Route::post('/envios-marmitas', [EnvioMarmitaController::class, 'store'])->name('envios-marmitas.store');
+        Route::put('/envios-marmitas/salvar', [EnvioMarmitaController::class, 'bulkUpdate'])->name('envios-marmitas.bulk-update');
+        Route::delete('/envios-marmitas/{envioMarmita}', [EnvioMarmitaController::class, 'destroy'])->name('envios-marmitas.destroy');
 
         Route::get('/configuracoes', [ConfiguracaoController::class, 'edit'])->name('configuracoes.edit');
         Route::put('/configuracoes', [ConfiguracaoController::class, 'update'])->name('configuracoes.update');

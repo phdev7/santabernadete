@@ -498,6 +498,30 @@ tbody tr:hover {
     gap: 0.7rem;
 }
 
+.kpi-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.kpi-card {
+    display: grid;
+    gap: 0.3rem;
+}
+
+.kpi-label {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.kpi-value {
+    margin: 0;
+    color: var(--blue-dark);
+    font-size: 1.48rem;
+    font-weight: 700;
+}
+
 .mantimentos-grid {
     display: grid;
     gap: 0.75rem;
@@ -528,6 +552,33 @@ tbody tr:hover {
 
 .mantimento-form .button-neutral,
 .mantimento-delete-form .button-danger {
+    width: 100%;
+}
+
+.envios-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.envio-card {
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    background: #fbfdff;
+    padding: 0.85rem;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.envio-form {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.envio-delete-form {
+    margin: 0;
+}
+
+.envio-delete-form .button-danger {
     width: 100%;
 }
 
@@ -607,6 +658,10 @@ tbody tr:hover {
         grid-template-columns: 1.4fr 1fr;
     }
 
+    .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .form-grid-two {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -643,6 +698,14 @@ tbody tr:hover {
         padding: 1rem;
     }
 
+    .envios-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .envio-card {
+        padding: 1rem;
+    }
+
     .sticky-savebar-inner {
         display: flex;
         justify-content: flex-end;
@@ -675,6 +738,14 @@ tbody tr:hover {
     }
 
     .mantimentos-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .kpi-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .envios-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }

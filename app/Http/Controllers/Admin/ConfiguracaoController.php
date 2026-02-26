@@ -13,8 +13,11 @@ class ConfiguracaoController extends Controller
 {
     public function edit(): View
     {
+        $configuracao = Configuracao::singleton();
+
         return view('admin.configuracoes.edit', [
-            'configuracao' => Configuracao::singleton(),
+            'configuracao' => $configuracao,
+            'syncVersion' => (int) ($configuracao->sync_version ?? 1),
         ]);
     }
 

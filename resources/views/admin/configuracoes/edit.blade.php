@@ -10,6 +10,7 @@
         </section>
 
         @include('admin.partials.nav')
+        @include('admin.partials.live_sync')
         @include('partials.alerts')
 
         <section class="card">

@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('configuracoes', function (Blueprint $table) {
             $table->id();
-            $table->string('nome_paroquia')->default('Paróquia Santa Bernadete');
+            $table->string('nome_paroquia')->default('Paroquia Santa Bernadete');
             $table->text('texto_home')->nullable();
             $table->string('chave_pix')->nullable();
             $table->text('endereco')->nullable();
             $table->string('google_maps_link')->nullable();
+            $table->unsignedBigInteger('sync_version')->default(1);
             $table->timestamps();
         });
     }

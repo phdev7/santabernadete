@@ -33,8 +33,8 @@ class Configuracao extends Model
         $configuracao = self::query()->firstOrCreate(
             ['id' => 1],
             [
-                'nome_paroquia' => 'Paróquia Santa Bernadete',
-                'texto_home' => 'Central de doações para apoiar famílias afetadas pelas enchentes em Ubá/MG.',
+                'nome_paroquia' => 'Paroquia Santa Bernadete',
+                'texto_home' => 'Central de doacoes para apoiar familias afetadas pelas enchentes em Uba/MG.',
                 'chave_pix' => '',
                 'endereco' => '',
                 'google_maps_link' => '',

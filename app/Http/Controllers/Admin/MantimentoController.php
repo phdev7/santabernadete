@@ -26,11 +26,14 @@ class MantimentoController extends Controller
             $statusFiltro = null;
         }
 
+        $configuracao = Configuracao::singleton();
+
         return view('admin.mantimentos.index', [
             'mantimentos' => $query->get(),
             'statusFiltro' => $statusFiltro,
             'statusLabels' => Mantimento::statusLabels(),
-            'configuracao' => Configuracao::singleton(),
+            'configuracao' => $configuracao,
+            'syncVersion' => (int) ($configuracao->sync_version ?? 1),
         ]);
     }
 

@@ -12,12 +12,15 @@
     </div>
 
     <div id="adminMenu" class="admin-menu" data-admin-menu>
-        <nav class="nav-links" aria-label="Navegação do painel">
+        <nav class="nav-links" aria-label="Navegacao do painel">
             <a class="pill {{ request()->routeIs('admin.mantimentos.*') ? 'active' : '' }}" href="{{ route('admin.mantimentos.index') }}">
                 Mantimentos
             </a>
+            <a class="pill {{ request()->routeIs('admin.envios-marmitas.*') ? 'active' : '' }}" href="{{ route('admin.envios-marmitas.index') }}">
+                Envios Marmitas
+            </a>
             <a class="pill {{ request()->routeIs('admin.configuracoes.*') ? 'active' : '' }}" href="{{ route('admin.configuracoes.edit') }}">
-                Configurações
+                Configuracoes
             </a>
         </nav>
 
