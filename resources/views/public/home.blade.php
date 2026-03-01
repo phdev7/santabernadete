@@ -1,18 +1,17 @@
 @extends('layouts.base')
 
-@section('title', 'Central de Doações - ' . $configuracao->nome_paroquia)
+@section('title', 'Central de Doacoes - ' . $configuracao->nome_paroquia)
 
 @section('content')
     <main class="page page-public">
         <header class="header">
             <h1 class="title">{{ $configuracao->nome_paroquia }}</h1>
             <p class="subtitle">
-                {{ $configuracao->texto_home ?: 'Central de doações para apoiar famílias afetadas pelas enchentes.' }}
+                {{ $configuracao->texto_home ?: 'Central de doacoes para apoiar familias afetadas pelas enchentes.' }}
             </p>
-            <p class="city">Ubá/MG</p>
+            <p class="city">Uba/MG</p>
             <p class="last-update">
-                Última atualização há
-                {{ $ultimaAtualizacaoMinutos === 1 ? '1 minuto' : $ultimaAtualizacaoMinutos . ' minutos' }}
+                Ultima atualizacao ha {{ $ultimaAtualizacaoMinutos === 1 ? '1 minuto' : $ultimaAtualizacaoMinutos . ' minutos' }}
             </p>
         </header>
 
@@ -34,7 +33,7 @@
                                 </div>
                                 <p class="priority">
                                     Prioridade:
-                                    {{ $mantimento->status === 'vermelho' ? 'Alta' : ($mantimento->status === 'amarelo' ? 'Média' : 'Baixa') }}
+                                    {{ $mantimento->status === 'vermelho' ? 'Alta' : ($mantimento->status === 'amarelo' ? 'Media' : 'Baixa') }}
                                 </p>
                             </article>
                         @endforeach
@@ -44,15 +43,15 @@
 
             <aside class="public-side">
                 <section class="card">
-                    <h2 class="section-title">Classificação</h2>
+                    <h2 class="section-title">Classificacao</h2>
                     <ul class="status-legend">
                         <li class="legend-item">
                             <span class="dot dot-critical" aria-hidden="true"></span>
-                            Necessário - Crítico
+                            Necessario - Critico
                         </li>
                         <li class="legend-item">
                             <span class="dot dot-moderate" aria-hidden="true"></span>
-                            Necessário - Moderado
+                            Necessario - Moderado
                         </li>
                         <li class="legend-item">
                             <span class="dot dot-filled" aria-hidden="true"></span>
@@ -62,10 +61,11 @@
                 </section>
 
                 <section class="card">
-                    <h2 class="section-title">Ajude Agora</h2>
-                    <p class="subtitle">Consulte endereço e chave PIX para enviar sua doação.</p>
+                    <h2 class="section-title">Acoes rapidas</h2>
+                    <p class="subtitle">Escolha se deseja doar ou registrar um pedido de ajuda.</p>
                     <div class="actions">
-                        <a class="button button-primary" href="{{ route('doar') }}">Quero Doar</a>
+                        <a class="button button-primary" href="{{ route('doar') }}">Quero doar</a>
+                        <a class="button button-neutral" href="{{ route('preciso-ajuda.create') }}">Preciso de ajuda</a>
                     </div>
                 </section>
             </aside>
@@ -74,7 +74,7 @@
         @if ($mantimentos->isNotEmpty())
             <section class="card mt-16">
                 <p class="small">
-                    A lista é ordenada automaticamente por prioridade: crítico, moderado e abastecido.
+                    A lista e ordenada automaticamente por prioridade: critico, moderado e abastecido.
                 </p>
             </section>
         @endif

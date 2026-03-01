@@ -2,14 +2,22 @@
 
 use App\Http\Controllers\Admin\AdminSyncController;
 use App\Http\Controllers\Admin\ConfiguracaoController;
-use App\Http\Controllers\Admin\EnvioMarmitaController;
+use App\Http\Controllers\Admin\ControleEnvioController;
 use App\Http\Controllers\Admin\MantimentoController;
 use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\PedidoAjudaPublicController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicController::class, 'home'])->name('home');
 Route::get('/doar', [PublicController::class, 'donate'])->name('doar');
+Route::get('/preciso-de-ajuda', [PedidoAjudaPublicController::class, 'create'])->name('preciso-ajuda.create');
+Route::post('/preciso-de-ajuda', [PedidoAjudaPublicController::class, 'store'])
+    ->middleware('throttle:20,1')
+    ->name('preciso-ajuda.store');
+Route::get('/pedido-{codigo}', [PedidoAjudaPublicController::class, 'show'])
+    ->where('codigo', '\d{5}')
+    ->name('pedido.show');
 Route::redirect('/login', '/admin/login')->name('login');
 
 Route::prefix('admin')->group(function (): void {
@@ -36,10 +44,10 @@ Route::prefix('admin')->group(function (): void {
         Route::put('/mantimentos/{mantimento}', [MantimentoController::class, 'update'])->name('mantimentos.update');
         Route::delete('/mantimentos/{mantimento}', [MantimentoController::class, 'destroy'])->name('mantimentos.destroy');
 
-        Route::get('/envios-marmitas', [EnvioMarmitaController::class, 'index'])->name('envios-marmitas.index');
-        Route::post('/envios-marmitas', [EnvioMarmitaController::class, 'store'])->name('envios-marmitas.store');
-        Route::put('/envios-marmitas/salvar', [EnvioMarmitaController::class, 'bulkUpdate'])->name('envios-marmitas.bulk-update');
-        Route::delete('/envios-marmitas/{envioMarmita}', [EnvioMarmitaController::class, 'destroy'])->name('envios-marmitas.destroy');
+        Route::get('/controle-envios', [ControleEnvioController::class, 'index'])->name('controle-envios.index');
+        Route::post('/controle-envios', [ControleEnvioController::class, 'store'])->name('controle-envios.store');
+        Route::put('/controle-envios/salvar', [ControleEnvioController::class, 'bulkUpdate'])->name('controle-envios.bulk-update');
+        Route::delete('/controle-envios/{pedido}', [ControleEnvioController::class, 'destroy'])->name('controle-envios.destroy');
 
         Route::get('/configuracoes', [ConfiguracaoController::class, 'edit'])->name('configuracoes.edit');
         Route::put('/configuracoes', [ConfiguracaoController::class, 'update'])->name('configuracoes.update');

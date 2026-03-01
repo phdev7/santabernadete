@@ -14,7 +14,7 @@ class HomePageTest extends TestCase
     public function test_home_exibe_mantimentos_na_ordem_de_prioridade(): void
     {
         Configuracao::query()->create([
-            'nome_paroquia' => 'Paróquia Santa Bernadete',
+            'nome_paroquia' => 'Paroquia Santa Bernadete',
             'texto_home' => 'Texto de teste',
             'chave_pix' => 'pix-chave',
             'endereco' => 'Rua teste, 100',
@@ -27,7 +27,7 @@ class HomePageTest extends TestCase
         ]);
 
         Mantimento::query()->create([
-            'nome' => 'Água mineral',
+            'nome' => 'Agua mineral',
             'status' => 'vermelho',
         ]);
 
@@ -40,11 +40,12 @@ class HomePageTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSeeInOrder([
-            'Água mineral',
+            'Agua mineral',
             'Leite',
             'Cobertor',
         ]);
-        $response->assertSee('Última atualização há');
-        $response->assertSee('Quero Doar');
+        $response->assertSee('Ultima atualizacao ha');
+        $response->assertSee('Quero doar');
+        $response->assertSee('Preciso de ajuda');
     }
 }

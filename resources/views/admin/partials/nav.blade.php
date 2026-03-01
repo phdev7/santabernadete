@@ -16,8 +16,8 @@
             <a class="pill {{ request()->routeIs('admin.mantimentos.*') ? 'active' : '' }}" href="{{ route('admin.mantimentos.index') }}">
                 Mantimentos
             </a>
-            <a class="pill {{ request()->routeIs('admin.envios-marmitas.*') ? 'active' : '' }}" href="{{ route('admin.envios-marmitas.index') }}">
-                Envios Marmitas
+            <a class="pill {{ request()->routeIs('admin.controle-envios.*') ? 'active' : '' }}" href="{{ route('admin.controle-envios.index') }}">
+                Controle de Envios
             </a>
             <a class="pill {{ request()->routeIs('admin.configuracoes.*') ? 'active' : '' }}" href="{{ route('admin.configuracoes.edit') }}">
                 Configuracoes

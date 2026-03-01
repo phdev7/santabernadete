@@ -20,7 +20,7 @@ class PublicController extends Controller
         });
 
         $ultimaAtualizacaoMinutos = $data['configuracao']->updated_at
-            ? (int) floor($data['configuracao']->updated_at->diffInMinutes(now()))
+            ? max(0, (int) floor($data['configuracao']->updated_at->diffInMinutes(now())))
             : 0;
 
         return view('public.home', [

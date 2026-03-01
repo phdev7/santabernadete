@@ -223,6 +223,16 @@ a {
     color: #166534;
 }
 
+.badge-status-em_andamento {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.badge-status-feito {
+    background: #dcfce7;
+    color: #166534;
+}
+
 .actions {
     margin-top: 1rem;
     display: grid;
@@ -555,31 +565,89 @@ tbody tr:hover {
     width: 100%;
 }
 
-.envios-grid {
+.controle-envios-grid {
     display: grid;
     gap: 0.75rem;
 }
 
-.envio-card {
+.controle-envio-card {
     border: 1px solid var(--border-soft);
     border-radius: 12px;
     background: #fbfdff;
     padding: 0.85rem;
     display: grid;
-    gap: 0.65rem;
+    gap: 0.75rem;
 }
 
-.envio-form {
+.controle-envio-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.controle-envio-number {
+    margin: 0;
+    font-weight: 700;
+    color: var(--blue-dark);
+}
+
+.controle-envio-form {
     display: grid;
     gap: 0.7rem;
 }
 
-.envio-delete-form {
+.controle-envio-actions {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.controle-envio-delete-form {
     margin: 0;
 }
 
-.envio-delete-form .button-danger {
+.controle-envio-delete-form .button-danger,
+.controle-envio-actions .button {
     width: 100%;
+}
+
+.recorrentes-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.recorrente-card {
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    background: #fbfdff;
+    padding: 0.85rem;
+    display: grid;
+    gap: 0.35rem;
+}
+
+.ticket-card {
+    display: grid;
+    gap: 1rem;
+}
+
+.ticket-grid {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.ticket-label {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.ticket-value {
+    margin: 0.2rem 0 0;
+    color: var(--text);
+    line-height: 1.45;
 }
 
 .sticky-savebar {
@@ -650,10 +718,6 @@ tbody tr:hover {
         grid-template-columns: 1.5fr 1fr;
     }
 
-    .list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     .admin-overview-grid {
         grid-template-columns: 1.4fr 1fr;
     }
@@ -698,12 +762,20 @@ tbody tr:hover {
         padding: 1rem;
     }
 
-    .envios-grid {
+    .controle-envios-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .envio-card {
+    .controle-envio-card {
         padding: 1rem;
+    }
+
+    .recorrentes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ticket-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .sticky-savebar-inner {
@@ -729,10 +801,6 @@ tbody tr:hover {
         font-size: 1.5rem;
     }
 
-    .list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     .inline-actions {
         grid-template-columns: 1fr 1fr;
     }
@@ -745,7 +813,41 @@ tbody tr:hover {
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    .envios-grid {
+    .controle-envios-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .recorrentes-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1200px) {
+    .list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media print {
+    body {
+        background: #ffffff;
+    }
+
+    .actions,
+    .top-nav,
+    .sticky-savebar,
+    .admin-nav-head {
+        display: none !important;
+    }
+
+    .page {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .card,
+    .header {
+        box-shadow: none;
+        border-color: #d1d5db;
     }
 }
