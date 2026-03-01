@@ -10,6 +10,7 @@ class PedidoAjudaService
     /**
      * @param array{
      *     nome_recebedor: string,
+     *     cpf: string,
      *     telefone: string,
      *     endereco_completo_referencias: string,
      *     itens: string,
@@ -27,6 +28,7 @@ class PedidoAjudaService
                 'numero_sequencial' => $proximoNumero,
                 'codigo_publico' => sprintf('pedido-%05d', $proximoNumero),
                 'nome_recebedor' => $data['nome_recebedor'],
+                'cpf' => $data['cpf'],
                 'telefone' => $data['telefone'],
                 'endereco_completo_referencias' => $data['endereco_completo_referencias'],
                 'itens' => $data['itens'],

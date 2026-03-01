@@ -45,6 +45,13 @@
                     </div>
 
                     <div>
+                        <label for="cpf">CPF</label>
+                        <input id="cpf" name="cpf" type="text" value="{{ old('cpf') }}" maxlength="20" required>
+                    </div>
+                </div>
+
+                <div class="form-grid-two">
+                    <div>
                         <label for="telefone">Telefone</label>
                         <input id="telefone" name="telefone" type="text" value="{{ old('telefone') }}" maxlength="32" required>
                     </div>
@@ -113,7 +120,7 @@
 
                 <div class="form-grid-two">
                     <div>
-                        <label for="filtro-busca">Busca por nome ou telefone</label>
+                        <label for="filtro-busca">Busca por nome, telefone ou CPF</label>
                         <input id="filtro-busca" name="busca" type="text" value="{{ $busca }}" maxlength="255">
                     </div>
 
@@ -159,6 +166,21 @@
                                         >
                                     </div>
 
+                                    <div>
+                                        <label for="pedido-{{ $pedido->id }}-cpf">CPF</label>
+                                        <input
+                                            id="pedido-{{ $pedido->id }}-cpf"
+                                            name="envios[{{ $pedido->id }}][cpf]"
+                                            type="text"
+                                            maxlength="20"
+                                            value="{{ $pedido->cpf }}"
+                                            required
+                                            form="bulk-update-controle-envios"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="form-grid-two">
                                     <div>
                                         <label for="pedido-{{ $pedido->id }}-telefone">Telefone</label>
                                         <input

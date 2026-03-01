@@ -70,6 +70,7 @@ class ControleEnvioController extends Controller
     ): RedirectResponse {
         $data = $request->validate([
             'nome_recebedor' => ['required', 'string', 'max:255'],
+            'cpf' => ['required', 'string', 'max:20'],
             'telefone' => ['required', 'string', 'max:32'],
             'endereco_completo_referencias' => ['required', 'string'],
             'itens' => ['required', 'string'],
@@ -90,6 +91,7 @@ class ControleEnvioController extends Controller
             'envios' => ['required', 'array', 'min:1'],
             'envios.*.id' => ['required', 'integer', 'exists:pedidos_ajuda,id'],
             'envios.*.nome_recebedor' => ['required', 'string', 'max:255'],
+            'envios.*.cpf' => ['required', 'string', 'max:20'],
             'envios.*.telefone' => ['required', 'string', 'max:32'],
             'envios.*.endereco_completo_referencias' => ['required', 'string'],
             'envios.*.itens' => ['required', 'string'],
@@ -104,6 +106,7 @@ class ControleEnvioController extends Controller
 
                 $pedido->update([
                     'nome_recebedor' => $envioData['nome_recebedor'],
+                    'cpf' => $envioData['cpf'],
                     'telefone' => $envioData['telefone'],
                     'endereco_completo_referencias' => $envioData['endereco_completo_referencias'],
                     'itens' => $envioData['itens'],
@@ -164,13 +167,20 @@ class ControleEnvioController extends Controller
 
         $telefoneBusca = PedidoAjuda::normalizePhone($busca);
 
-        $query->where(function (Builder $builder) use ($busca, $telefoneBusca): void {
+        $cpfBusca = PedidoAjuda::normalizeCpf($busca);
+
+        $query->where(function (Builder $builder) use ($busca, $telefoneBusca, $cpfBusca): void {
             $builder
                 ->where('nome_recebedor', 'like', '%'.$busca.'%')
-                ->orWhere('telefone', 'like', '%'.$busca.'%');
+                ->orWhere('telefone', 'like', '%'.$busca.'%')
+                ->orWhere('cpf', 'like', '%'.$busca.'%');
 
             if ($telefoneBusca !== '') {
                 $builder->orWhere('telefone_normalizado', 'like', '%'.$telefoneBusca.'%');
+            }
+
+            if ($cpfBusca !== '') {
+                $builder->orWhere('cpf_normalizado', 'like', '%'.$cpfBusca.'%');
             }
         });
     }

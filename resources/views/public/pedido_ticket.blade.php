@@ -25,6 +25,10 @@
                     <p class="ticket-value">{{ $pedido->nome_recebedor }}</p>
                 </div>
                 <div>
+                    <p class="ticket-label">CPF</p>
+                    <p class="ticket-value">{{ $pedido->cpf }}</p>
+                </div>
+                <div>
                     <p class="ticket-label">Telefone</p>
                     <p class="ticket-value">{{ $pedido->telefone }}</p>
                 </div>

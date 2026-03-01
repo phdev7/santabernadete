@@ -24,6 +24,7 @@ class PedidoAjuda extends Model
         'numero_sequencial',
         'codigo_publico',
         'nome_recebedor',
+        'cpf',
         'telefone',
         'endereco_completo_referencias',
         'itens',
@@ -31,6 +32,7 @@ class PedidoAjuda extends Model
         'nome_normalizado',
         'endereco_normalizado',
         'telefone_normalizado',
+        'cpf_normalizado',
     ];
 
     protected static function booted(): void
@@ -39,6 +41,7 @@ class PedidoAjuda extends Model
             $pedido->nome_normalizado = self::normalizeText($pedido->nome_recebedor);
             $pedido->endereco_normalizado = self::normalizeText($pedido->endereco_completo_referencias);
             $pedido->telefone_normalizado = self::normalizePhone($pedido->telefone);
+            $pedido->cpf_normalizado = self::normalizeCpf($pedido->cpf);
         });
     }
 
@@ -95,6 +98,11 @@ class PedidoAjuda extends Model
     }
 
     public static function normalizePhone(?string $value): string
+    {
+        return preg_replace('/\D+/', '', (string) $value) ?? '';
+    }
+
+    public static function normalizeCpf(?string $value): string
     {
         return preg_replace('/\D+/', '', (string) $value) ?? '';
     }

@@ -22,9 +22,14 @@
                     </div>
 
                     <div>
-                        <label for="telefone">Telefone</label>
-                        <input id="telefone" name="telefone" type="text" value="{{ old('telefone') }}" maxlength="32" required>
+                        <label for="cpf">CPF</label>
+                        <input id="cpf" name="cpf" type="text" value="{{ old('cpf') }}" maxlength="20" required>
                     </div>
+                </div>
+
+                <div>
+                    <label for="telefone">Telefone</label>
+                    <input id="telefone" name="telefone" type="text" value="{{ old('telefone') }}" maxlength="32" required>
                 </div>
 
                 <div>

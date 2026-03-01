@@ -26,6 +26,7 @@ class PedidoAjudaPublicController extends Controller
     ): RedirectResponse {
         $data = $request->validate([
             'nome_recebedor' => ['required', 'string', 'max:255'],
+            'cpf' => ['required', 'string', 'max:20'],
             'telefone' => ['required', 'string', 'max:32'],
             'endereco_completo_referencias' => ['required', 'string'],
             'itens' => ['required', 'string'],

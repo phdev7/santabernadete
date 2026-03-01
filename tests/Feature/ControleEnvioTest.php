@@ -12,10 +12,24 @@ class ControleEnvioTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_criacao_publica_exige_cpf(): void
+    {
+        $response = $this->post(route('preciso-ajuda.store'), [
+            'nome_recebedor' => 'Maria',
+            'cpf' => '',
+            'telefone' => '(32) 99999-1000',
+            'endereco_completo_referencias' => 'Rua A, 100',
+            'itens' => 'Cesta basica',
+        ]);
+
+        $response->assertSessionHasErrors(['cpf']);
+    }
+
     public function test_criacao_publica_exige_telefone(): void
     {
         $response = $this->post(route('preciso-ajuda.store'), [
             'nome_recebedor' => 'Maria',
+            'cpf' => '123.456.789-10',
             'telefone' => '',
             'endereco_completo_referencias' => 'Rua A, 100',
             'itens' => 'Cesta basica',
@@ -28,6 +42,7 @@ class ControleEnvioTest extends TestCase
     {
         $this->post(route('preciso-ajuda.store'), [
             'nome_recebedor' => 'Maria',
+            'cpf' => '123.456.789-10',
             'telefone' => '(32) 99999-1000',
             'endereco_completo_referencias' => 'Rua A, 100',
             'itens' => 'Cesta basica',
@@ -35,6 +50,7 @@ class ControleEnvioTest extends TestCase
 
         $this->post(route('preciso-ajuda.store'), [
             'nome_recebedor' => 'Joao',
+            'cpf' => '987.654.321-00',
             'telefone' => '(32) 99999-2000',
             'endereco_completo_referencias' => 'Rua B, 200',
             'itens' => 'Agua',
@@ -57,6 +73,7 @@ class ControleEnvioTest extends TestCase
             'numero_sequencial' => 1,
             'codigo_publico' => 'pedido-00001',
             'nome_recebedor' => 'Maria',
+            'cpf' => '123.456.789-10',
             'telefone' => '32999991000',
             'endereco_completo_referencias' => 'Rua A, 100',
             'itens' => 'Cobertores',
@@ -70,6 +87,7 @@ class ControleEnvioTest extends TestCase
             ->assertOk()
             ->assertSee($pedido->numero_exibicao)
             ->assertSee('Maria')
+            ->assertSee('123.456.789-10')
             ->assertSee('Carlos')
             ->assertSee('Entregar apos 18h');
     }
@@ -80,6 +98,7 @@ class ControleEnvioTest extends TestCase
             'numero_sequencial' => 1,
             'codigo_publico' => 'pedido-00001',
             'nome_recebedor' => 'Maria',
+            'cpf' => '123.456.789-10',
             'telefone' => '32999991000',
             'endereco_completo_referencias' => 'Rua A, 100',
             'itens' => 'Agua',
@@ -97,6 +116,7 @@ class ControleEnvioTest extends TestCase
                     [
                         'id' => $pedido->id,
                         'nome_recebedor' => 'Maria Souza',
+                        'cpf' => '222.333.444-55',
                         'telefone' => '(32) 98888-1000',
                         'endereco_completo_referencias' => 'Rua A, 110',
                         'itens' => 'Agua e alimentos',
@@ -111,6 +131,7 @@ class ControleEnvioTest extends TestCase
         $this->assertDatabaseHas('pedidos_ajuda', [
             'id' => $pedido->id,
             'nome_recebedor' => 'Maria Souza',
+            'cpf' => '222.333.444-55',
             'telefone' => '(32) 98888-1000',
             'status' => PedidoAjuda::STATUS_FEITO,
         ]);
@@ -129,6 +150,7 @@ class ControleEnvioTest extends TestCase
 
         $this->post(route('preciso-ajuda.store'), [
             'nome_recebedor' => 'Maria',
+            'cpf' => '123.456.789-10',
             'telefone' => '(32) 99999-1000',
             'endereco_completo_referencias' => 'Rua A, 100',
             'itens' => 'Cesta basica',
@@ -144,6 +166,7 @@ class ControleEnvioTest extends TestCase
             'numero_sequencial' => 1,
             'codigo_publico' => 'pedido-00001',
             'nome_recebedor' => 'Maria Souza',
+            'cpf' => '123.456.789-10',
             'telefone' => '(32) 99999-1000',
             'endereco_completo_referencias' => 'Rua A, 10 - Centro',
             'itens' => 'Agua',
@@ -157,6 +180,7 @@ class ControleEnvioTest extends TestCase
             'numero_sequencial' => 2,
             'codigo_publico' => 'pedido-00002',
             'nome_recebedor' => '  maria souza ',
+            'cpf' => '12345678910',
             'telefone' => '32 99999-1000',
             'endereco_completo_referencias' => 'Rua A 10 Centro',
             'itens' => 'Alimentos',
